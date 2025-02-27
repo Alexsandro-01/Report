@@ -6,7 +6,7 @@ function CreateSelects(values, selectName) {
   select.id = `${selectName}-${count}`;
 
   let DefaultOPtion = document.createElement('option');
-  DefaultOPtion.text = "Selecione";
+  DefaultOPtion.text = "Select";
   DefaultOPtion.value = "";
   select.appendChild(DefaultOPtion)
 
@@ -58,7 +58,7 @@ function CreateNewFormElement() {
   const inputPrice = CreateNewElements('input', 'Price');
   inputPrice.setAttribute('type', 'number');
   inputPrice.setAttribute('id', `price-${count}`);
-  inputPrice.setAttribute('placeholder', 'Ex: 10.20');
+  inputPrice.setAttribute('placeholder', 'Ex: 10.2');
 
   const inputPriceLabel = CreateNewElements('label', 'Price');
   inputPriceLabel.setAttribute('for', `price-${count}`);
