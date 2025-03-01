@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'JetBrains Mono', sans-serif;
+  font-size: 12px;
 }
 
 :root {
@@ -52,5 +53,37 @@ select {
   background-color: transparent;
   color: var(--font-color);
   padding: 4px;
+}
+
+button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  color: var(--background-color);
+  cursor: pointer;
+}
+
+#add {
+  background-color: var(--primary-color);
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 30px;
+  bottom: 20px;
+  right: 20px;
+  font-size: 50px;
+  border-radius: 50%;
+}
+
+#generate {
+  background-color: #41a166;
+  color: var(--background-color);
+}
+
+.btn-box {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 

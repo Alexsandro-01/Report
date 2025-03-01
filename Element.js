@@ -66,30 +66,74 @@ function CreateNewFormElement() {
 
   box.appendChild(inputPriceLabel);
 
-  form.appendChild(box);
+  if (count > 0) {
+    let previosBox = document.querySelector(`#box-${count - 1}`);
+    previosBox.insertAdjacentElement('afterend', box);
+  } else {
+    form.appendChild(box);
+  }
+
+  
+  //Add surplus input and paid input
+  if (count === 0) {
+    let div = CreateNewElements('div', '');
+    div.classList.add('surplus');
+
+    let surplusLabel = CreateNewElements('label', 'Surplus');
+    surplusLabel.setAttribute('for', `surplus`);
+
+    let surplusInput = CreateNewElements('input', 'Surplus');
+    surplusInput.setAttribute('type', 'number');
+    surplusInput.setAttribute('id', `surplus`);
+    surplusInput.setAttribute('placeholder', 'Ex: 10.2');
+
+    surplusLabel.appendChild(surplusInput);
+
+    let paidLabel = CreateNewElements('label', 'Paid');
+    paidLabel.setAttribute('for', `paid`);
+
+    let paidInput = CreateNewElements('input', 'Paid');
+    paidInput.setAttribute('type', 'number');
+    paidInput.setAttribute('id', `paid`);
+    paidInput.setAttribute('placeholder', 'Ex: 10.2');
+
+    paidLabel.appendChild(paidInput);
+
+    div.appendChild(surplusLabel);
+    div.appendChild(paidLabel);
+
+    form.appendChild(div);
+  }
 
   count++;
 }
 
-function ExtractData() {
-  const boxes = document.querySelectorAll('.box');
+function CreateResult(data) {
+  const resultElement = document.querySelector('#result');
+  const surplus = document.querySelector('#surplus').value;
+  const paid = document.querySelector('#paid').value;
 
-  let data = [];
+  data.forEach(item => {
+    let result = CreateNewElements('p', '');
+    result.textContent = `${item.product} ${item.quantity} ${item.unit} x ${item.price} = ${item.total}`;
 
-  boxes.forEach(box => {
-    const product = box.querySelector(`#Products-${data.length}`);
-    const unit = box.querySelector(`#Units-${data.length}`);
-    const quantity = box.querySelector(`#quantity-${data.length}`);
-    const price = box.querySelector(`#price-${data.length}`);
-
-    data.push({
-      product: product.value,
-      unit: unit.value,
-      quantity: quantity.value,
-      price: price.value
-    });
+    resultElement.appendChild(result);
+    resultElement.appendChild(CreateNewElements('br', ''));
   });
 
-  // return data;
-  console.log(data);
+  resultElement.appendChild(CreateNewElements('br', ''));
+  resultElement.appendChild(CreateNewElements('p', '-----------------------------------------------------------'));
+  resultElement.appendChild(CreateNewElements('br', ''));
+
+  const total = calculateTotal(data);
+
+  let surplusElement = CreateNewElements('p', `Saldo passado: ${surplus}`);
+  let totalElement = CreateNewElements('p', `Total: ${total} + ${surplus} = ${Number(total) + Number(surplus)}`);
+  let newSurplus = CreateNewElements('p', `Saldo atual: ${Number(total) + Number(surplus)} - ${paid} = ${total - paid}`);
+
+  resultElement.appendChild(surplusElement);
+  resultElement.appendChild(CreateNewElements('br', ''));
+  resultElement.appendChild(totalElement);
+  resultElement.appendChild(CreateNewElements('br', ''));
+  resultElement.appendChild(newSurplus);
 }
