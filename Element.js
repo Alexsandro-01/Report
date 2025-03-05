@@ -122,18 +122,23 @@ function CreateResult(data) {
   });
 
   resultElement.appendChild(CreateNewElements('br', ''));
-  resultElement.appendChild(CreateNewElements('p', '-----------------------------------------------------------'));
+  resultElement.appendChild(CreateNewElements('p', '--------------------------------------------------'));
   resultElement.appendChild(CreateNewElements('br', ''));
 
   const total = calculateTotal(data);
 
+  const totalPlusSurplus = Number(total) + Number(surplus);
+  const newSurplus = totalPlusSurplus - Number(paid);
+
   let surplusElement = CreateNewElements('p', `Saldo passado: ${surplus}`);
-  let totalElement = CreateNewElements('p', `Total: ${total} + ${surplus} = ${Number(total) + Number(surplus)}`);
-  let newSurplus = CreateNewElements('p', `Saldo atual: ${Number(total) + Number(surplus)} - ${paid} = ${total - paid}`);
+  let totalElement = CreateNewElements('p', `Total: ${total} + ${surplus} = ${totalPlusSurplus}`);
+  let newSurplusElemnt = CreateNewElements('p', `Saldo atual: ${Number(total) + Number(surplus)} - ${Number(paid)} = ${newSurplus}`);
 
   resultElement.appendChild(surplusElement);
   resultElement.appendChild(CreateNewElements('br', ''));
   resultElement.appendChild(totalElement);
   resultElement.appendChild(CreateNewElements('br', ''));
-  resultElement.appendChild(newSurplus);
+  resultElement.appendChild(newSurplusElemnt);
+
+  resultElement.classList.add('result-background');
 }
