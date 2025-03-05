@@ -121,11 +121,12 @@ function CreateResult(data) {
     resultElement.appendChild(CreateNewElements('br', ''));
   });
 
-  resultElement.appendChild(CreateNewElements('br', ''));
-  resultElement.appendChild(CreateNewElements('p', '--------------------------------------------------'));
-  resultElement.appendChild(CreateNewElements('br', ''));
-
   const total = calculateTotal(data);
+  resultElement.appendChild(CreateNewElements('p', `Total: ${total}`));
+
+  resultElement.appendChild(CreateNewElements('br', ''));
+  resultElement.appendChild(CreateNewElements('p', '--------------------------------------------'));
+  resultElement.appendChild(CreateNewElements('br', ''));
 
   const totalPlusSurplus = Number(total) + Number(surplus);
   const newSurplus = totalPlusSurplus - Number(paid);
